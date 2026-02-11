@@ -6,7 +6,7 @@ const SidebarFilters = ({ filters, setFilters }) => {
         Filters
       </h2>
 
-      <div className="z-50 relative">
+      <div>
         <label className="block font-semibold text-gray-700 mb-3 text-sm uppercase tracking-wide">
           Category
         </label>
@@ -15,8 +15,7 @@ const SidebarFilters = ({ filters, setFilters }) => {
           value={filters.categoryId}
           onChange={(e) =>
             setFilters({ ...filters, categoryId: e.target.value })
-          }
-        >
+          }>
           <option value="">All Categories</option>
           <option value="1">Clothes</option>
           <option value="2">Electronics</option>
@@ -56,7 +55,7 @@ const SidebarFilters = ({ filters, setFilters }) => {
       <button
         type="button"
         onClick={() =>
-          setFilters({ categoryId: "", priceMin: 1, priceMax: 1000 })
+          setFilters({ categoryId: "", priceMin: 0, priceMax: 1000 })
         }
         className="w-full bg-linear-to-r from-gray-100 to-gray-200 hover:from-emerald-500 hover:to-emerald-600 hover:text-white text-gray-700 rounded-xl py-3 font-semibold transition-all duration-300 shadow-sm hover:shadow-md"
       >

@@ -1,9 +1,9 @@
 import { createBrowserRouter, RouterProvider, Outlet } from 'react-router-dom'
 import './App.css'
-import Header from './compuntes/Header'
-import Home from './compuntes/Home'
-import Products from './compuntes/Products'
-
+import Header from './components/Header'
+import Home from './components/Home'
+import Products from './components/Products'
+import SingleProduct from './components/SingleProduct'
 const Layout = () => {
   return (
     <>
@@ -20,8 +20,8 @@ function App() {
       element: <Layout />,
       children: [
         { index: true, element: <Home /> },
-        { path: "Products", element: <Products /> },
-        { path: "Products/:id", element: <></> },
+        { path: "products", element: <Products /> },
+        { path: "single-product/:id", element: <SingleProduct /> },
         { path: "cart", element: <></> },
         { path: "login", element: <></> },
         { path: "profile", element: <></> }
