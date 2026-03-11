@@ -4,15 +4,6 @@ import Header from './components/Header'
 import Home from './components/Home'
 import Products from './components/Products'
 import SingleProduct from './components/SingleProduct'
-import Cart from './components/Cart'
-import Login from './components/Login'
-import Signup from './components/Signup'
-import Profile from './components/Profile'
-import Favorites from './components/Favorites'
-import About from './components/About'
-import Contact from './components/Contact'
-import Services from './components/Services'
-
 const Layout = () => {
   return (
     <>
@@ -31,14 +22,9 @@ function App() {
         { index: true, element: <Home /> },
         { path: "products", element: <Products /> },
         { path: "single-product/:id", element: <SingleProduct /> },
-        { path: "cart", element: <Cart /> },
-        { path: "login", element: <Login /> },
-        { path: "signup", element: <Signup /> },
-        { path: "profile", element: <Profile /> },
-        { path: "favorites", element: <Favorites /> },
-        { path: "about", element: <About /> },
-        { path: "contact", element: <Contact /> },
-        { path: "services", element: <Services /> }
+        { path: "cart", element: <></> },
+        { path: "login", element: <></> },
+        { path: "profile", element: <></> }
       ]
     }
   ])

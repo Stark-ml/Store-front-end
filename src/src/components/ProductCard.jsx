@@ -1,11 +1,6 @@
 import { useNavigate } from "react-router-dom";
-import { useFavoritesStore } from "../store/useFavoritesStore";
-
 const ProductCard = ({ product }) => {
   const navigate = useNavigate();
-  const toggleFavorite = useFavoritesStore((state) => state.toggleFavorite);
-  const isFavorite = useFavoritesStore((state) => state.isFavorite);
-  const favorited = isFavorite(product?.id);
 
   const placeholderImage =
     "data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='400' height='300'%3E%3Crect width='400' height='300' fill='%23e5e7eb'/%3E%3Ctext x='50%25' y='50%25' dominant-baseline='middle' text-anchor='middle' font-family='sans-serif' font-size='18' fill='%239ca3af'%3ENo Image%3C/text%3E%3C/svg%3E";
@@ -13,18 +8,12 @@ const ProductCard = ({ product }) => {
   const handleNavigate = () => {
     navigate(`/single-product/${product.id}`);
   };
-
-  const handleFavorite = (e) => {
-    e.stopPropagation();
-    toggleFavorite(product);
-  };
-
   return (
     <div
       onClick={handleNavigate}
       className="group bg-white rounded-2xl shadow-md hover:shadow-2xl transition-all duration-300 overflow-hidden border border-gray-100 hover:border-emerald-400 cursor-pointer"
     >
-      <div className="relative h-56 overflow-hidden bg-gray-100">
+      <div className="h-56 overflow-hidden bg-gray-100">
         <img
           src={product?.images?.[0] || placeholderImage}
           alt={product?.title}
@@ -35,25 +24,6 @@ const ProductCard = ({ product }) => {
           }}
           className="w-full h-full object-cover group-hover:scale-110 transition-transform duration-500"
         />
-        <button
-          onClick={handleFavorite}
-          className="absolute top-3 right-3 w-9 h-9 rounded-full bg-white/80 hover:bg-white flex items-center justify-center shadow-md transition-all duration-200 hover:scale-110 cursor-pointer z-10"
-        >
-          <svg
-            xmlns="http://www.w3.org/2000/svg"
-            viewBox="0 0 24 24"
-            fill={favorited ? "#ef4444" : "none"}
-            stroke={favorited ? "#ef4444" : "#6b7280"}
-            strokeWidth={2}
-            className="w-5 h-5 transition-colors duration-200"
-          >
-            <path
-              strokeLinecap="round"
-              strokeLinejoin="round"
-              d="M4.318 6.318a4.5 4.5 0 000 6.364L12 20.364l7.682-7.682a4.5 4.5 0 00-6.364-6.364L12 7.636l-1.318-1.318a4.5 4.5 0 00-6.364 0z"
-            />
-          </svg>
-        </button>
       </div>
 
       <div className="p-5">

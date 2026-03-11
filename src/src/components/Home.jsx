@@ -1,6 +1,5 @@
 import axios from 'axios';
 import { useState, useEffect } from 'react';
-import { useNavigate } from 'react-router-dom';
 
 const placeholderProductImage = "data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='400' height='300'%3E%3Crect width='400' height='300' fill='%23e5e7eb'/%3E%3Ctext x='50%25' y='50%25' dominant-baseline='middle' text-anchor='middle' font-family='sans-serif' font-size='18' fill='%239ca3af'%3ENo Image%3C/text%3E%3C/svg%3E";
 const placeholderCategoryImage = "data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='200' height='200'%3E%3Crect width='200' height='200' fill='%23e5e7eb'/%3E%3Ctext x='50%25' y='50%25' dominant-baseline='middle' text-anchor='middle' font-family='sans-serif' font-size='14' fill='%239ca3af'%3ECategory%3C/text%3E%3C/svg%3E";
@@ -10,7 +9,6 @@ const Home = () => {
   const [products, setProducts] = useState([]);
   const [loading, setLoading] = useState(true);
   const selectedIds = [87, 86, 4, 5];
-  const navigate = useNavigate();
 
   useEffect(() => {
     const fetchData = async () => {
@@ -47,10 +45,10 @@ const Home = () => {
           </p>
 
           <div className="flex gap-4 mt-8">
-            <button onClick={() => navigate('/products')} className="bg-emerald-500 hover:bg-emerald-600 transition px-6 py-3 rounded-xl font-medium cursor-pointer">
+            <button className="bg-emerald-500 hover:bg-emerald-600 transition px-6 py-3 rounded-xl font-medium cursor-pointer">
               Shop Now
             </button>
-            <button onClick={() => document.getElementById('categories-section')?.scrollIntoView({ behavior: 'smooth' })} className="border border-gray-700 hover:border-emerald-400 transition px-6 py-3 rounded-xl cursor-pointer">
+            <button className="border border-gray-700 hover:border-emerald-400 transition px-6 py-3 rounded-xl cursor-pointer">
               Browse Categories
             </button>
           </div>
@@ -60,7 +58,7 @@ const Home = () => {
           <div className="absolute inset-0 bg-linear-to-tr from-transparent via-emerald-500/10 to-transparent" />
         </div>
       </section>
-      <section id="categories-section" className="max-w-7xl mx-auto px-6 py-20">
+      <section className="max-w-7xl mx-auto px-6 py-20">
         <h2 className="text-3xl font-semibold mb-12">
           Shop by Categories
         </h2>
@@ -97,8 +95,7 @@ const Home = () => {
           {products.slice(0, 3).map((product) => (
             <div
               key={product.id}
-              onClick={() => navigate(`/single-product/${product.id}`)}
-              className="bg-gray-900 rounded-2xl p-6 hover:scale-[1.02] transition cursor-pointer"
+              className="bg-gray-900 rounded-2xl p-6 hover:scale-[1.02] transition"
             >
               <img
                 src={product.images?.[0] || placeholderProductImage}
@@ -149,7 +146,7 @@ const Home = () => {
         <p className="text-gray-400 mt-4">
           Explore thousands of premium products today.
         </p>
-        <button onClick={() => navigate('/products')} className="cursor-pointer mt-8 bg-emerald-500 hover:bg-emerald-600 transition px-10 py-4 rounded-xl font-medium">
+        <button className="cursor-pointer mt-8 bg-emerald-500 hover:bg-emerald-600 transition px-10 py-4 rounded-xl font-medium">
           Start Shopping
         </button>
       </section>

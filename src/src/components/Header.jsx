@@ -1,26 +1,13 @@
 import React, { useState } from 'react'
 import { Link, useNavigate } from 'react-router-dom'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
-import { faMagnifyingGlass, faBars, faXmark, faHeart, faUser } from '@fortawesome/free-solid-svg-icons'
+import { faMagnifyingGlass, faBars, faXmark, faHeart } from '@fortawesome/free-solid-svg-icons'
 import { faCartShopping } from '@fortawesome/free-solid-svg-icons'
-import { useCartStore } from '../store/useCartStore'
-import { useAuthStore } from '../store/useAuthStore'
-import { useFavoritesStore } from '../store/useFavoritesStore'
 
 const Header = () => {
   const [isMenuOpen, setIsMenuOpen] = useState(false)
   const [sreach, setSreach] = useState('')
   const navigate = useNavigate()
-
-  const carts = useCartStore((state) => state.carts)
-  const cartCount = carts.reduce((total, item) => total + item.quantity, 0)
-
-  const user = useAuthStore((state) => state.user)
-  const isAuthenticated = useAuthStore((state) => state.isAuthenticated)
-  const logout = useAuthStore((state) => state.logout)
-
-  const favorites = useFavoritesStore((state) => state.favorites)
-  const favCount = favorites.length
 
   const handleSearch = () => {
     if (!sreach.trim()) return
@@ -74,50 +61,21 @@ const Header = () => {
           <Link to="/cart" className="relative text-white text-xl hover:text-emerald-500 transition-all duration-200">
             <FontAwesomeIcon icon={faCartShopping} />
             <span className="absolute -top-2 -right-2 bg-red-500 text-white text-xs rounded-full w-5 h-5 flex items-center justify-center hover:scale-110 transition-all duration-200">
-              {cartCount}
+              0
             </span>
           </Link>
 
           <Link to="/favorites" className="relative text-white text-xl hover:text-red-500 transition-all duration-200">
             <FontAwesomeIcon icon={faHeart} />
-            {favCount > 0 && (
-              <span className="absolute -top-2 -right-2 bg-red-500 text-white text-xs rounded-full w-5 h-5 flex items-center justify-center hover:scale-110 transition-all duration-200">
-                {favCount}
-              </span>
-            )}
+            <span className="absolute -top-2 -right-2 bg-red-500 text-white text-xs rounded-full w-5 h-5 flex items-center justify-center hover:scale-110 transition-all duration-200">
+              0
+            </span>
 
           </Link>
-
-          {isAuthenticated && user ? (
-            <div className="flex items-center gap-3">
-              <Link to="/profile" className="flex items-center gap-2 hover:opacity-80 transition">
-                <img
-                  src={user.avatar || 'https://i.imgur.com/yhW6Yw1.jpg'}
-                  alt={user.name}
-                  className="w-8 h-8 rounded-full object-cover border-2 border-emerald-500"
-                />
-                <span className="text-white text-sm font-medium hidden md:inline">
-                  {user.name}
-                </span>
-              </Link>
-              <button
-                onClick={() => {
-                  logout()
-                  navigate('/')
-                }}
-                className="text-white/70 hover:text-red-400 text-sm px-3 py-1 transition cursor-pointer"
-              >
-                Logout
-              </button>
-            </div>
-          ) : (
-            <>
-              <Link to="/login" className="text-white px-4">Login</Link>
-              <Link to="/signup" className="bg-emerald-500 text-white px-5 py-2 rounded-full">
-                Sign Up
-              </Link>
-            </>
-          )}
+          <Link to="/login" className="text-white px-4">Login</Link>
+          <Link to="/signup" className="bg-emerald-500 text-white px-5 py-2 rounded-full">
+            Sign Up
+          </Link>
         </div>
       </div>
       <nav

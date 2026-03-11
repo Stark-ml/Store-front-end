@@ -1,19 +1,14 @@
 import { useParams } from "react-router-dom";
 import { useState, useEffect } from "react";
 import axios from "axios";
-import { useCartStore } from "../store/useCartStore";
-import { useFavoritesStore } from "../store/useFavoritesStore";
+
 
 const SingleProduct = () => {
     const { id } = useParams();
-    const addToCart = useCartStore((state) => state.addToCart);
-    const toggleFavorite = useFavoritesStore((state) => state.toggleFavorite);
-    const isFavorite = useFavoritesStore((state) => state.isFavorite);
 
     const [product, setProduct] = useState(null);
     const [loading, setLoading] = useState(true);
     const [error, setError] = useState(false);
-    const [added, setAdded] = useState(false);
 
     useEffect(() => {
         setLoading(true);
@@ -77,32 +72,12 @@ const SingleProduct = () => {
                     </div>
 
                     <div className="flex gap-5">
-                        <button
-                            onClick={() => {
-                                addToCart(product);
-                                setAdded(true);
-                                setTimeout(() => setAdded(false), 1500);
-                            }}
-                            className={`${added ? 'bg-emerald-700' : 'bg-emerald-500 hover:bg-emerald-600'} px-8 py-4 rounded-xl font-semibold transition duration-300 shadow-lg shadow-emerald-500/20 cursor-pointer`}
-                        >
-                            {added ? '✓ Added!' : 'Add to Cart'}
+                        <button className="bg-emerald-500 hover:bg-emerald-600 px-8 py-4 rounded-xl font-semibold transition duration-300 shadow-lg shadow-emerald-500/20 cursor-pointer">
+                            Add to Cart
                         </button>
 
                         <button className="border border-white/20 hover:border-white/40 px-8 py-4 rounded-xl transition duration-300 cursor-pointer">
                             Buy Now
-                        </button>
-
-                        <button
-                            onClick={() => toggleFavorite(product)}
-                            className={`border px-4 py-4 rounded-xl transition duration-300 cursor-pointer ${
-                                isFavorite(product.id)
-                                    ? 'border-red-500/40 bg-red-500/10 text-red-400'
-                                    : 'border-white/20 hover:border-red-500/40 text-white/60 hover:text-red-400'
-                            }`}
-                        >
-                            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill={isFavorite(product.id) ? "currentColor" : "none"} stroke="currentColor" strokeWidth={2} className="w-6 h-6">
-                                <path strokeLinecap="round" strokeLinejoin="round" d="M4.318 6.318a4.5 4.5 0 000 6.364L12 20.364l7.682-7.682a4.5 4.5 0 00-6.364-6.364L12 7.636l-1.318-1.318a4.5 4.5 0 00-6.364 0z" />
-                            </svg>
                         </button>
                     </div>
                 </div>
